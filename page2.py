@@ -1,12 +1,14 @@
 # import the necessary files
-# from testing import *
-from page1 import *
 from tkinter import *
 
 from pathlib import Path
 
 from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 from PIL import Image, ImageTk
+
+import cv2
+
+from page1 import im_th
 
 
 OUTPUT_PATH = Path(__file__).parent
@@ -15,7 +17,6 @@ ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
-
 
 window = Tk()
 
@@ -101,7 +102,7 @@ translate_button = Button(
 translate_button.place(x=341.0, y=159.0, width=179.0, height=35.0)
 
 
-img = Image.open("build\ex.png")
+img = Image.open("assets/New folder/thresholded_image.jpg")
 img_resized = img.resize((170, 230))  # new width & height
 photo = ImageTk.PhotoImage(img_resized)
 imglabel = Label(image=photo)
@@ -120,6 +121,5 @@ canvas.create_text(
     fill="#848484",
     font=("Archivo Regular", 10 * -1),
 )
-print(file_path)
 window.resizable(False, False)
 window.mainloop()
