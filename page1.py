@@ -1,26 +1,27 @@
-
+# import the necessary files & libraries
 from tkinter import *
-
-import tkinter as tk
-
 from pathlib import Path
-
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 from tkinter import filedialog
-from tkinter.filedialog import askopenfile
 from PIL import Image, ImageTk
+from tkinter.filedialog import askopenfile
 
 import cv2
 import numpy as np
-
-global im_th
+import tkinter as tk
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
+# functions
+
+def relative_to_assets(path: str) -> Path:
+    return ASSETS_PATH / Path(path)
+
+# 1. function to save the preprocessed image
 def file_save():
     cv2.imwrite('assets/New Folder/test.jpg', im_th)
 
+# 2. perform preprocessing steps
 def preprocess_img(file_path):
     global im_th 
 
@@ -62,19 +63,27 @@ def preprocess_img(file_path):
     # Draw the contours on the original image
     cv2.drawContours(image, contours, -1, (0, 0, 255), 1)
 
+# 3. uploading the selected image
+def upload_file():
+    global img
+    f_types = [("Jpg Files", "*.jpg")]
+    filename = filedialog.askopenfilename(filetypes=f_types)
+    img = Image.open(filename)
+    img_resized = img.resize((170, 230))  # new width & height
+    img = ImageTk.PhotoImage(img_resized)
+    b2 = tk.Button(window, image=img)  # using Button
+    b2.grid(row=1, column=1)
+    b2.place(
+        x=62.0,
+        y=36.0,
+    )
 
+    preprocess_img(filename)
 
-    # cv2.imshow('Contours', image)
-    # cv2.imshow('gray', gray)
-    # cv2.imshow('im_th', im_th)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
-
-
-
-
-def relative_to_assets(path: str) -> Path:
-    return ASSETS_PATH / Path(path)
+# navigating to the next page
+def nextPage():
+    window.destroy()
+    import page2
 
 
 window = Tk()
@@ -135,23 +144,6 @@ upload_button.place(
 )
 
 
-def upload_file():
-    global img
-    f_types = [("Jpg Files", "*.jpg")]
-    filename = filedialog.askopenfilename(filetypes=f_types)
-    img = Image.open(filename)
-    img_resized = img.resize((170, 230))  # new width & height
-    img = ImageTk.PhotoImage(img_resized)
-    b2 = tk.Button(window, image=img)  # using Button
-    b2.grid(row=1, column=1)
-    b2.place(
-        x=62.0,
-        y=36.0,
-    )
-
-    preprocess_img(filename)
-
-
 button_image_close = PhotoImage(
     file=relative_to_assets("close_button.png"))
 close_button = Button(
@@ -167,12 +159,6 @@ close_button.place(
     width=20.0,
     height=20.0
 )
-
-
-def nextPage():
-    window.destroy()
-    import page2
-
 
 button_image_next = PhotoImage(
     file=relative_to_assets("next_button.png"))

@@ -1,15 +1,20 @@
-
+# import the necessary files & libraries
+from tkinter import *
 from pathlib import Path
-
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
+# functions
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
+
+# navigating to the next page
+def nextPage():
+    window.destroy()
+    import page1
 
 
 window = Tk()
@@ -45,12 +50,6 @@ canvas.create_text(
     fill="#848484",
     font=("Archivo Regular", 10 * -1)
 )
-
-
-def nextPage():
-    window.destroy()
-    import page1
-
 
 button_image_start = PhotoImage(
     file=relative_to_assets("start_button.png"))

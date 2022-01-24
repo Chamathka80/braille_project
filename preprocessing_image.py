@@ -1,8 +1,8 @@
+# import the necessary files & libraries
 import cv2
 import numpy as np
 
 def preprocess_img():
-	global im_th 
 
 	# importing the image
 	image = cv2.imread('D://Educational Files//RUSL//Group Project//System//final_system//braille_project//assets//test_images//7.jpg')
