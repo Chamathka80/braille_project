@@ -31,7 +31,6 @@ def preprocess_img():
 
 	# Find Canny edges
 	edged = cv2.Canny(im_th, 0, 255)
-	cv2.waitKey(0)
 
 	# Finding Contours
 	contours, hierarchy = cv2.findContours(edged,
@@ -40,9 +39,11 @@ def preprocess_img():
 	# Draw the contours on the original image
 	cv2.drawContours(image, contours, -1, (0, 0, 255), 1)
 
-	cv2.imshow('Contours', image)
+	cv2.imshow('contoured image', image)
 	cv2.imshow('gray', gray)
-	cv2.imshow('im_th', im_th)
+	cv2.imshow('thresholded image', im_th)
+	cv2.imshow('edged', edged)
+	print(contours)
 	cv2.waitKey(0)
 	cv2.destroyAllWindows()
 
