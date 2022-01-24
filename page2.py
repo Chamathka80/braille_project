@@ -1,20 +1,26 @@
-# import the necessary files
-# from testing import *
-from page1 import *
+# import the necessary files & libraries
 from tkinter import *
-
 from pathlib import Path
-
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 from PIL import Image, ImageTk
-
+from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
+# functions
 
 def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
+
+# navigating to the next page
+def nextPage():
+    window.destroy()
+    import page3
+
+# navigating to the home page
+def homePage():
+    window.destroy()
+    import page0
 
 
 window = Tk()
@@ -36,17 +42,6 @@ canvas = Canvas(
 canvas.place(x=0, y=0)
 canvas.create_rectangle(9.0, 10.0, 689.0, 290.0, fill="#FFFFFF", outline="")
 
-# -------------------------------------------
-# canvas.create_text(
-#     400.0,
-#     100.0,
-#     anchor="nw",
-#     text=img,
-#     fill="#111",
-#     font=("Archivo Regular", 10 * -1),
-# )
-
-
 button_image_close = PhotoImage(file=relative_to_assets("close_button.png"))
 close_button = Button(
     image=button_image_close,
@@ -56,11 +51,6 @@ close_button = Button(
     relief="flat",
 )
 close_button.place(x=650.0, y=20.0, width=20.0, height=20.0)
-
-
-def homePage():
-    window.destroy()
-    import page0
 
 
 button_image_home = PhotoImage(file=relative_to_assets("home_button.png"))
@@ -84,11 +74,6 @@ detect_button = Button(
 detect_button.place(x=312.0, y=110.0, width=238.0, height=40.0)
 
 
-def nextPage():
-    window.destroy()
-    import page3
-
-
 button_image_translate = PhotoImage(
     file=relative_to_assets("translate_button.png"))
 translate_button = Button(
@@ -101,7 +86,7 @@ translate_button = Button(
 translate_button.place(x=341.0, y=159.0, width=179.0, height=35.0)
 
 
-img = Image.open("build\ex.png")
+img = Image.open("assets/New folder/thresholded_image.jpg")
 img_resized = img.resize((170, 230))  # new width & height
 photo = ImageTk.PhotoImage(img_resized)
 imglabel = Label(image=photo)
@@ -120,6 +105,5 @@ canvas.create_text(
     fill="#848484",
     font=("Archivo Regular", 10 * -1),
 )
-print(file_path)
 window.resizable(False, False)
 window.mainloop()
