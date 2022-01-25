@@ -12,6 +12,8 @@ import tkinter as tk
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
+global im_th
+
 # functions
 
 def relative_to_assets(path: str) -> Path:
@@ -19,7 +21,7 @@ def relative_to_assets(path: str) -> Path:
 
 # 1. function to save the preprocessed image
 def file_save():
-    cv2.imwrite('assets/New Folder/test.jpg', im_th)
+    cv2.imwrite('assets/thresholded_img/thresholded_image.jpg', im_th)
 
 # 2. perform preprocessing steps
 def preprocess_img(file_path):
@@ -79,6 +81,7 @@ def upload_file():
     )
 
     preprocess_img(filename)
+    file_save()
 
 # navigating to the next page
 def nextPage():
@@ -87,6 +90,8 @@ def nextPage():
 
 
 window = Tk()
+window.title(
+    'Construction of Restoration System for Old Books Written in Sinhala Braille')
 
 window.geometry("700x300")
 window.configure(bg="#D5CFCF")
