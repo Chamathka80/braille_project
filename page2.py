@@ -7,6 +7,8 @@ from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
 
+global im_th
+
 # functions
 
 def relative_to_assets(path: str) -> Path:
@@ -24,6 +26,8 @@ def homePage():
 
 
 window = Tk()
+window.title(
+    'Construction of Restoration System for Old Books Written in Sinhala Braille')
 
 window.geometry("700x300")
 window.configure(bg="#D5CFCF")
@@ -86,7 +90,7 @@ translate_button = Button(
 translate_button.place(x=341.0, y=159.0, width=179.0, height=35.0)
 
 
-img = Image.open("assets/New folder/thresholded_image.jpg")
+img = Image.open("assets/thresholded_img/thresholded_image.jpg")
 img_resized = img.resize((170, 230))  # new width & height
 photo = ImageTk.PhotoImage(img_resized)
 imglabel = Label(image=photo)

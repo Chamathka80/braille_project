@@ -18,6 +18,8 @@ def nextPage():
 
 
 window = Tk()
+window.title(
+    'Construction of Restoration System for Old Books Written in Sinhala Braille')
 
 window.geometry("700x300")
 window.configure(bg="#D5CFCF")
